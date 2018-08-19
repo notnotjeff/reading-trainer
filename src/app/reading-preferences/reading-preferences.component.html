@@ -1,0 +1,15 @@
+<h3>Preferences</h3>
+
+<form (ngSubmit)="onSetPreferences(f)" #f="ngForm">
+    <label for="grades">Select Grade:</label>
+    <select name="grades" class="form-control">
+        <option value="{{ grade[1] }}" *ngFor="let grade of grades">{{ grade[0] }}</option>
+    </select>
+
+    <span class="menu-heading">Keys:</span>
+    <label *ngFor="let key of keys" class="form-control">
+        <input type="checkbox">
+        {{ key }}
+    </label>
+    
+</form>
