@@ -1,1 +1,9 @@
 <h3>Reading</h3>
+<div class="game-container">
+    <div class="piece">
+        <img src="/assets/pieces/{{ piece }}" alt="" *ngIf="piece !== ''">
+    </div>
+    <div class="game-controls">
+        <button class="btn btn-primary" (click)="getNewPiece()">New Piece</button>
+    </div>
+</div>

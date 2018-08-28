@@ -1,0 +1,11 @@
+nav {
+    margin-bottom: 50px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.886);
+}
+
+.logo {
+    cursor: pointer;
+    margin-left: 10px;
+    color: white;
+}

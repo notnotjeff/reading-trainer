@@ -1,0 +1,19 @@
+.preferences-container {
+    border: 1px solid black;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    height: 350px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+@media (max-width: 1000px) {
+    .preferences-container {
+        min-height: 350px;
+    }
+}

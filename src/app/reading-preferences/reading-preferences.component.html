@@ -1,15 +1,24 @@
 <h3>Preferences</h3>
-
-<form (ngSubmit)="onSetPreferences(f)" #f="ngForm">
-    <label for="grades">Select Grade:</label>
-    <select name="grades" class="form-control">
-        <option value="{{ grade[1] }}" *ngFor="let grade of grades">{{ grade[0] }}</option>
-    </select>
-
-    <span class="menu-heading">Keys:</span>
-    <label *ngFor="let key of keys" class="form-control">
-        <input type="checkbox">
-        {{ key }}
-    </label>
-    
-</form>
+<div class="preferences-container">
+    <form #f="ngForm">
+        <div class="grade-container">
+            <label>Select Grade:</label>
+            <select name="selectGrade" class="form-control" [(ngModel)]="currentGrade" (change)="onSelectGrade($event, keysData)">
+                <!-- <option value="1">Grade 1</option> -->
+                <!-- <option value="2">Grade 2</option> -->
+                <!-- <option value="3">Grade 3</option> -->
+                <option value="4">Grade 4</option>
+            </select>
+        </div>
+        {{ freshForm }}
+        <div class="key-container">
+            <span class="menu-heading" >Keys:</span>
+            <div id="keys-group" ngModelGroup="keys" (change)="onSelectKeys($event, keysData)" #keysData="ngModelGroup">
+                <label *ngFor="let key of keys" class="form-control">
+                    <input type="checkbox" value="{{ key }}" name="{{ key }}" [ngModel]="defaultChecked">
+                    {{ key[0] }}
+                </label>
+            </div>
+        </div>
+    </form>
+</div>

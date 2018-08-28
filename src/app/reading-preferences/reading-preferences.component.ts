@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { ReadingSelectService } from '../reading-select.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-reading-preferences',
@@ -6,17 +8,35 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./reading-preferences.component.css']
 })
 export class ReadingPreferencesComponent implements OnInit {
-  currentGrade: Number = 1;
-  grades: Array<any> = [["Grade 1", 1], ["Grade 2", 2], ["Grade 3", 3], ["Grade 4", 4]];
-  keys: String[] = ["G", "D", "A", "F"];
+  currentGrade: number = 4;
+  keys: any = [];
+  defaultChecked: boolean = true;
 
-  constructor() { }
+  constructor(private readingService: ReadingSelectService) { }
 
   ngOnInit() {
+    this.readingService.setGrade(this.currentGrade);
+    this.keys = this.readingService.getKeys();
+    this.readingService.setKeys(this.keys);
   }
 
-  onSetPreferences() {
-    console.log('Setting preferences')
+  onSelectGrade(grade: any) {
+    this.readingService.setGrade(+grade.target.value);
+    this.keys = this.readingService.getKeys();
+    this.readingService.setKeys(this.keys);
   }
 
+  onSelectKeys(event: any, form: NgForm) {
+    let newKeys = []
+    let formKeys = form.value;
+
+    for (let key in formKeys) {
+      if (formKeys[key] == true) {
+        newKeys.push(key)
+      }
+    }
+
+    this.readingService.setKeys(newKeys);
+    this.keys = this.readingService.getKeys();
+  }
 }

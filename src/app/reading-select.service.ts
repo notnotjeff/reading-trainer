@@ -1,38 +1,99 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReadingSelectService {
-  allowedKeys: String[] = [];
-  grade: Number = 4;
+  allowedKeys: any = [];
+  grade: number = 4;
   readingExcerpts = [];
+  pieceChanged = new Subject<string>();
+  currentPiece: string = "";
+  gradeKeys = new Subject<String[]>();
 
   private keysDirectory = {
-    1: ["C"],
-    2: ["G"],
-    3: ["D"],
-    4: ["G", "D", "A", "F"],
+    1: ["C1"],
+    2: ["G2"],
+    3: ["D3"],
+    4: ["G4", "D4", "A4", "F4"]
   }
 
+  // Naming scheme: grade_key/piece-number_part-number (gr4 = grade 4, g01 = piece 01 in key of g, p1 = part 1)
   private readingDirectory = [
-    { key: "G", img: "https://i.ytimg.com/vi/IWcp8bCBPcY/maxresdefault.jpg", grade: 4 },
-    { key: "D", img: "http://www.musiclearning.com/lessoncentral/reading/rdefquarter.gif", grade: 4 },
-    { key: "A", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeJKA79akbyHCEX1EeU9_KsrPDYVLLcnRr3OfyvQLh1ciICOEKRQ", grade: 4 },
-    { key: "F", img: "https://www.fundamental-changes.com/wp-content/uploads/2018/05/28-Sight-Reading-Part-4-Ex-2.png", grade: 4 }
+    { key: "G4", img: "gr4_g01_p1.png", grade: 4 },
+    { key: "G4", img: "gr4_g01_p2.png", grade: 4 },
+    { key: "G4", img: "gr4_g01_p3.png", grade: 4 },
+    { key: "D4", img: "gr4_d01_p1.png", grade: 4 },
+    { key: "D4", img: "gr4_d01_p2.png", grade: 4 },
+    { key: "D4", img: "gr4_d01_p3.png", grade: 4 },
+    { key: "D4", img: "gr4_d01_p4.png", grade: 4 },
+    { key: "D4", img: "gr4_d01_p5.png", grade: 4 },
+    { key: "F4", img: "gr4_f01_p1.png", grade: 4 },
+    { key: "F4", img: "gr4_f01_p2.png", grade: 4 },
+    { key: "F4", img: "gr4_f01_p3.png", grade: 4 },
+    { key: "F4", img: "gr4_f01_p4.png", grade: 4 }
   ]
 
   constructor() { }
 
   setKeys(keys: String[]) {
     this.allowedKeys = keys;
+    this.getPiece();
   }
 
-  setGrade(newGrade: Number) {
-    this.grade = newGrade;
+  getKeys() {
+    return this.keysDirectory[+this.grade].slice();
   }
 
-  setExcerpts() {
-    this.readingExcerpts = this.readingDirectory.slice().filter(excerpt => { this.allowedKeys.includes(excerpt.key) && excerpt.grade === this.grade });
+  setGrade(newGrade: number) {
+    if (newGrade !== 0) {
+      this.grade = newGrade;
+    } else {
+      this.grade = 1;
+    }
+    this.getPiece();
+  }
+
+  getPiece() {
+    // Filter pieces so only selected ones qualify
+    this.readingExcerpts = this.readingDirectory.slice().filter(excerpt => { 
+      if (this.allowedKeys.includes(excerpt.key) && excerpt.grade === +this.grade) {
+        return true;
+      } 
+      return false;
+    });
+
+    this.shufflePieces();
+
+    if (this.readingExcerpts.length > 0 ) {
+      if (this.readingExcerpts.length === 1) {
+        this.currentPiece = this.readingExcerpts[0].img;
+        this.pieceChanged.next(this.readingExcerpts[0].img);
+      } else if (this.currentPiece !== this.readingExcerpts[0].img) {
+        this.currentPiece = this.readingExcerpts[0].img;
+        this.pieceChanged.next(this.readingExcerpts[0].img);
+      } else {
+        this.currentPiece = this.readingExcerpts[1].img;
+        this.pieceChanged.next(this.readingExcerpts[1].img);
+      }
+    } else {
+      this.pieceChanged.next("");
+    }
+  }
+
+  shufflePieces() {
+    // If there are no pieces to show, don't shuffle
+    if (this.readingExcerpts.length < 1) { return false };
+
+    let array = this.readingExcerpts.slice();
+
+    // Shuffle array
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+
+    this.readingExcerpts = array;
   }
 }
