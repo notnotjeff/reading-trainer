@@ -32,7 +32,9 @@ export class ReadingSelectService {
     { key: "F4", img: "gr4_f01_p1.png", grade: 4 },
     { key: "F4", img: "gr4_f01_p2.png", grade: 4 },
     { key: "F4", img: "gr4_f01_p3.png", grade: 4 },
-    { key: "F4", img: "gr4_f01_p4.png", grade: 4 }
+    { key: "F4", img: "gr4_f01_p4.png", grade: 4 },
+    { key: "A4", img: "gr4_a01_p1.png", grade: 4 },
+    { key: "A4", img: "gr4_a01_p2.png", grade: 4 }
   ]
 
   constructor() { }
