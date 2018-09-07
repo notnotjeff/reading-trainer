@@ -24,6 +24,11 @@
     justify-content: center;
 }
 
+.btn-primary {
+    background-color: #c72500 !important;
+    border: 0;
+}
+
 @media (max-width: 1100px) {
     .game-container {
         min-height: 350px;

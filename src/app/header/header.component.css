@@ -1,11 +1,13 @@
 nav {
     margin-bottom: 50px;
     padding: 10px;
-    background-color: rgba(0, 0, 0, 0.886);
+    background-color: #0b0403;
 }
 
 .logo {
     cursor: pointer;
     margin-left: 10px;
     color: white;
+    display: flex;
+    align-items: center;
 }
