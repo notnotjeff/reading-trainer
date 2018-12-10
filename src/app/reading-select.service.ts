@@ -6,35 +6,47 @@ import { Subject } from 'rxjs';
 })
 export class ReadingSelectService {
   allowedKeys: any = [];
-  grade: number = 4;
+  grade: number = 1;
   readingExcerpts = [];
   pieceChanged = new Subject<string>();
   currentPiece: string = "";
   gradeKeys = new Subject<String[]>();
 
   private keysDirectory = {
-    1: ["C1"],
-    2: ["G2"],
-    3: ["D3"],
-    4: ["G4", "D4", "A4", "F4"]
+    1: ["C", "Am"],
+    2: ["G"],
+    3: ["D"],
+    4: ["G", "D", "Em"]
   }
 
   // Naming scheme: grade_key/piece-number_part-number (gr4 = grade 4, g01 = piece 01 in key of g, p1 = part 1)
   private readingDirectory = [
-    { key: "G4", img: "gr4_g01_p1.png", grade: 4 },
-    { key: "G4", img: "gr4_g01_p2.png", grade: 4 },
-    { key: "G4", img: "gr4_g01_p3.png", grade: 4 },
-    { key: "D4", img: "gr4_d01_p1.png", grade: 4 },
-    { key: "D4", img: "gr4_d01_p2.png", grade: 4 },
-    { key: "D4", img: "gr4_d01_p3.png", grade: 4 },
-    { key: "D4", img: "gr4_d01_p4.png", grade: 4 },
-    { key: "D4", img: "gr4_d01_p5.png", grade: 4 },
-    { key: "F4", img: "gr4_f01_p1.png", grade: 4 },
-    { key: "F4", img: "gr4_f01_p2.png", grade: 4 },
-    { key: "F4", img: "gr4_f01_p3.png", grade: 4 },
-    { key: "F4", img: "gr4_f01_p4.png", grade: 4 },
-    { key: "A4", img: "gr4_a01_p1.png", grade: 4 },
-    { key: "A4", img: "gr4_a01_p2.png", grade: 4 }
+    { key: "C", img: "gr1_c01.png", grade: 1 },
+    { key: "C", img: "gr1_c02.png", grade: 1 },
+    { key: "C", img: "gr1_c03.png", grade: 1 },
+    { key: "C", img: "gr1_c04.png", grade: 1 },
+    { key: "Am", img: "gr1_am01.png", grade: 1 },
+    { key: "Am", img: "gr1_am02.png", grade: 1 },
+    { key: "Am", img: "gr1_am03.png", grade: 1 },
+    { key: "Am", img: "gr1_am04.png", grade: 1 },
+    { key: "G", img: "gr4_g01_p1.png", grade: 4 },
+    { key: "G", img: "gr4_g01_p2.png", grade: 4 },
+    { key: "G", img: "gr4_g01_p3.png", grade: 4 },
+    { key: "Em", img: "gr4_em01_p1.png", grade: 4 },
+    { key: "Em", img: "gr4_em01_p2.png", grade: 4 },
+    { key: "Em", img: "gr4_em02_p1.png", grade: 4 },
+    { key: "Em", img: "gr4_em02_p2.png", grade: 4 },
+    { key: "D", img: "gr4_d01_p1.png", grade: 4 },
+    { key: "D", img: "gr4_d01_p2.png", grade: 4 },
+    { key: "D", img: "gr4_d01_p3.png", grade: 4 },
+    { key: "D", img: "gr4_d01_p4.png", grade: 4 },
+    { key: "D", img: "gr4_d01_p5.png", grade: 4 },
+    { key: "F", img: "gr4_f01_p1.png", grade: 4 },
+    { key: "F", img: "gr4_f01_p2.png", grade: 4 },
+    { key: "F", img: "gr4_f01_p3.png", grade: 4 },
+    { key: "F", img: "gr4_f01_p4.png", grade: 4 },
+    { key: "A", img: "gr4_a01_p1.png", grade: 4 },
+    { key: "A", img: "gr4_a01_p2.png", grade: 4 }
   ]
 
   constructor() { }

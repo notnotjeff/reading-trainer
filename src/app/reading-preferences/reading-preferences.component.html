@@ -4,7 +4,7 @@
         <div class="grade-container">
             <label>Select Grade:</label>
             <select name="selectGrade" class="form-control" [(ngModel)]="currentGrade" (change)="onSelectGrade($event)">
-                <!-- <option value="1">Grade 1</option> -->
+                <option value="1">Grade 1</option>
                 <!-- <option value="2">Grade 2</option> -->
                 <!-- <option value="3">Grade 3</option> -->
                 <option value="4">Grade 4</option>
@@ -15,7 +15,7 @@
             <div id="keys-group" ngModelGroup="keys" (change)="onSelectKeys($event, keysData)" #keysData="ngModelGroup">
                 <label *ngFor="let key of keys" class="form-control">
                     <input type="checkbox" value="{{ key }}" name="{{ key }}" [ngModel]="defaultChecked">
-                    {{ key[0] }}
+                    {{ key }}
                 </label>
             </div>
         </div>

@@ -8,7 +8,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./reading-preferences.component.css']
 })
 export class ReadingPreferencesComponent implements OnInit {
-  currentGrade: number = 4;
+  currentGrade: number = 1;
   keys: any = [];
   defaultChecked: boolean = true;
 
